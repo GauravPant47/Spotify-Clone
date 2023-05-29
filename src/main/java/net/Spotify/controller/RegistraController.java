@@ -23,9 +23,7 @@ public class RegistraController {
 	public String getRegistraPage(Model model)
 	{
 		User user = new User();
-		
 		model.addAttribute("user", user);
-		
 		return "registra";
 	}
 	
