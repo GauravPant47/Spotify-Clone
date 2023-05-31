@@ -1,13 +1,12 @@
 package net.Spotify.service;
 
-import org.springframework.web.multipart.MultipartFile;
 
 
-import net.Spotify.model.FilesInDatabases;
+import net.Spotify.model.FileModel;
 
 public interface FileDatabasesService {
 	
-	FilesInDatabases getFile(String fileId);
+	FileModel getFile(Long Id);
 	
-	FilesInDatabases storeFile(MultipartFile file);
+	FileModel saveFile(FileModel file);
 }
