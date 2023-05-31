@@ -3,21 +3,23 @@
 <head>
 <meta charset="UTF-8">
 <title>Login</title>
+<link rel="stylesheet" th:href="@{css/loginStyle.css}">
 </head>
 <body>
-	<form th:action="@{/login}" method="post">
 
-		<h1 style="margin: 15px 0 15px">Login</h1>
-		
-		<label for="email">Email</label> 
-		
-		<input id="email" type="text" name="email" placeholder="Email" /> 
-		
-		<label for="password">Password</label>
-		
-		<input id="password" type="text" name="password" placeholder="Password" />
+<div class="cart">
+        <div class="login-container">
+            <h2>Log in to Spotify</h2>
+            <form th:action="@{/login}" method="post">
+                <label for="email">Email or username</label>
+                <input type="email" placeholder="Email or username" required>
 
-		<button type="submit">Login</button>
-	</form>
+                <label for="password">Password</label>
+                <input type="password" placeholder="Password" required>
+
+                <input type="submit" value="Log In">
+            </form>
+        </div>
+</div>
 </body>
 </html>
