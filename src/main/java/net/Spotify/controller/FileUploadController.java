@@ -11,29 +11,29 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import net.Spotify.model.AudioFile;
+import net.Spotify.model.FilesInDatabases;
 import net.Spotify.payload.Response;
-import net.Spotify.service.AudioFileService;
+import net.Spotify.service.FileDatabasesService;
+
+
 
 @RestController
-public class AudioFileUploadController {
-
+public class FileUploadController {
 	@Autowired
-	private AudioFileService audioFileService;
+	private FileDatabasesService databasesService;
 
 	@PostMapping("/uploadFile")
 	public Response uploadFile(@RequestParam("file") MultipartFile file) {
-		AudioFile audioFile = audioFileService.storeFile(file);
+		FilesInDatabases fileName = databasesService.storeFile(file);
 
-		String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath().path("/downloadFile/")
-				.path(audioFile.getFileName()).toUriString();
+		String fileDownloadUri = ServletUriComponentsBuilder.fromCurrentContextPath().path("/downloadFile")
+				.path(fileName.getFileName()).toUriString();
 
-		return new Response(audioFile.getFileName(), fileDownloadUri, file.getContentType(), file.getSize());
+		return new Response(fileName.getFileName(), fileDownloadUri, file.getContentType(), file.getSize());
 	}
-	
-	@PostMapping("/uploadMultipleFile")
-	public List<Response> uploadMultipleFiles(@RequestParam("files") MultipartFile[] files)
-	{
+
+	@PostMapping("/uploadMultipleFiles")
+	public List<Response> uploadMultipleFiles(@RequestParam("files") MultipartFile[] files) {
 		return Arrays.asList(files).stream().map(file -> uploadFile(file)).collect(Collectors.toList());
 	}
 }

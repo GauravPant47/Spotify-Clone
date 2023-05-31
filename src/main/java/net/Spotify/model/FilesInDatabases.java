@@ -9,9 +9,8 @@ import javax.persistence.Table;
 import org.hibernate.annotations.GenericGenerator;
 
 @Entity
-@Table(name = "audiofile")
-public class AudioFile {
-
+@Table(name = "files")
+public class FilesInDatabases {
 	@Id
 	@GeneratedValue(generator = "uuid")
 	@GenericGenerator(name = "uuid", strategy = "uuid2")
@@ -24,11 +23,11 @@ public class AudioFile {
 	@Lob
 	private byte[] data;
 
-	public AudioFile() {
+	public FilesInDatabases() {
 
 	}
-
-	public AudioFile(String fileName, String fileType, byte[] data) {
+	
+	public FilesInDatabases(String fileName, String fileType, byte[] data) {
 		super();
 		this.fileName = fileName;
 		this.fileType = fileType;
@@ -66,5 +65,6 @@ public class AudioFile {
 	public void setData(byte[] data) {
 		this.data = data;
 	}
-
+	
+	
 }
