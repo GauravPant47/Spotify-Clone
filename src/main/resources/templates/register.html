@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<div class="container">
+        <h1>Spring Boot Blog Application</h1>
+        <hr />
+        <a th:href="@{/index}">Home</a>
+        <h2>Register New Account</h2>
+        <form action="#"
+              th:action="@{/register}"
+              th:object="${account}"
+              method="POST">
+            <div>
+                <label for="fullName">Full Name</label>
+                <input id="fullName" type="text" th:field="*{fullName}" placeholder="Full Name"/>
+            </div>
+            <div>
+                <label for="gender">Last Name</label>
+                <input id="gender" type="text" th:field="*{gender}" placeholder="Gender"/>
+            </div>
+            <div>
+                <label for="dob">Email</label>
+                <input id="dob" type="date" th:field="*{dob}" placeholder="Date Of Birth"/>
+            </div>
+            <div>
+                <label for="email">Email</label>
+                <input id="email" type="text" th:field="*{email}" placeholder="Email"/>
+            </div>
+            <div>
+                <label for="password">Password</label>
+                <input id="password" type="password" th:field="*{password}" placeholder="Password" maxlength="15"/>
+            </div>
+            <button type="submit">Register!</button>
+        </form>
+    </div>
+</body>
+</html>

@@ -2,24 +2,27 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
-<title>Login</title>
-<link rel="stylesheet" th:href="@{css/loginStyle.css}">
+<title>Insert title here</title>
 </head>
 <body>
-
-<div class="cart">
-        <div class="login-container">
-            <h2>Log in to Spotify</h2>
-            <form th:action="@{/login}" method="post">
-                <label for="email">Email or username</label>
-                <input type="email" placeholder="Email or username" required>
-
+<div class="container">
+        <h1>Spring Boot Blog Application</h1>
+        <hr />
+        <a th:href="@{/index}">Home</a>
+        <h2>Login</h2>
+        <form action="#"
+              th:action="@{/login}"
+              method="POST">
+            <div>
+                <label for="email">Email</label>
+                <input id="email" type="text" name="email" placeholder="Email" />
+            </div>
+            <div>
                 <label for="password">Password</label>
-                <input type="password" placeholder="Password" required>
-
-                <input type="submit" value="Log In">
-            </form>
-        </div>
-</div>
+                <input id="password" type="password" name="password" placeholder="Password" />
+            </div>
+            <button type="submit">Login!</button>
+        </form>
+    </div>
 </body>
 </html>

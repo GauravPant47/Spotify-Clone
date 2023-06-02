@@ -11,4 +11,8 @@ public class MainController {
 		return "index";
 	}
 	
+	@GetMapping("/index/upload")
+	public String uploadFile() {
+		return "adminpage";
+	}
 }

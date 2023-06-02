@@ -1,5 +1,8 @@
-create database spotify;
+create database securityTest;
 
-use spotify;
+use securityTest;
 
-drop table song;
+show tables;
+select * from account_authority;
+drop database files;
+

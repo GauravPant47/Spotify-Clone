@@ -10,31 +10,29 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.stereotype.Component;
 
-import net.Spotify.model.User;
-import net.Spotify.service.UserService;
+import net.Spotify.model.Account;
+import net.Spotify.service.AccountService;
 
-public class MyUserDetailsService implements UserDetailsService{
 
-	
+
+@Component("userDetailsService")
+public class MyUserDetailsService implements UserDetailsService {
 	@Autowired
-	private UserService userService;
-	
+	private AccountService accountService;
+
 	@Override
 	public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-		  Optional<User> optionalAccount = userService.findByEmail(email);
-	        if (!optionalAccount.isPresent()) {
-	            throw new UsernameNotFoundException("Account not found");
-	        }
-	        User user = optionalAccount.get();
-	        List<GrantedAuthority> grantedAuthorities = user
-	                .getRole()
-	                .stream()
-	                .map(role -> new SimpleGrantedAuthority(role.getName()))
-	                .collect(Collectors.toList());
+		Optional<Account> optionalAccount = accountService.findOneByEmail(email);
+		if (!optionalAccount.isPresent()) {
+			throw new UsernameNotFoundException("Account not found");
+		}
+		Account account = optionalAccount.get();
+		List<GrantedAuthority> grantedAuthorities = account.getAuthorities().stream()
+				.map(authority -> new SimpleGrantedAuthority(authority.getName())).collect(Collectors.toList());
 
-	        return new org.springframework.security.core.userdetails.User(user.getEmail(), user.getPassword(), grantedAuthorities); // (2)
-
+		return new org.springframework.security.core.userdetails.User(account.getEmail(), account.getPassword(),
+				grantedAuthorities); // (2)
 	}
-
 }

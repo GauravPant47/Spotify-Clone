@@ -5,8 +5,9 @@
 <title>Insert title here</title>
 </head>
 <body>
+<a th:href="@{/index}">Home</a>
  <h2>File Upload</h2>
-    <form method="POST" action="/upload" enctype="multipart/form-data">
+    <form method="POST" th:action="@{/uploadFile}" enctype="multipart/form-data">
         <input type="file" name="file" />
         <br /><br />
         <input type="submit" value="Upload" />

@@ -4,7 +4,7 @@
 
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Spotify</title>
 <link rel="stylesheet" th:href="@{css/indexStyle.css}">
 </head>
 
@@ -64,9 +64,19 @@
 					<li><a href="#">Support</a></li>
 					<li><a href="#">Download</a></li>
 					<li class="divider">|</li>
-					<li><a th:href="@{/registra}">Sign Up</a></li>
 				</ul>
-				<a th:href="@{/login}"><button type="button">Log In</button></a>
+				<ul sec:authorize="!isAuthenticated()">
+					<li><a th:href="@{/register}">Register</a></li>
+					<li><a th:href="@{/login}">Login</a></li>
+				</ul>
+				<div sec:authorize="isAuthenticated()">
+					<form th:action="@{/logout}" method="POST">
+						<div>
+							<label>Hi, <span sec:authentication="name">Username</span></label>
+						</div>
+						<button type="submit">Logout</button>
+					</form>
+				</div>
 			</div>
 		</div>
 
@@ -335,8 +345,8 @@
 					ads. No credit card needed.</p>
 			</div>
 			<div class="button">
-				<a th:href="@{/registra}"><button type=" button">Sign up free</button>
-				</a>
+				<a th:href="@{/registra}"><button type=" button">Sign
+						up free</button> </a>
 			</div>
 		</div>
 	</div>
