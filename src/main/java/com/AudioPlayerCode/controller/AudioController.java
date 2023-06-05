@@ -47,6 +47,7 @@ public class AudioController {
         audio.setAudioData(audioFile.getBytes());
         audioRepository.save(audio);
 
+        // Save the image file
         Image image = new Image();
         image.setTitle(title);
         image.setImageData(imageFile.getBytes());
@@ -68,4 +69,16 @@ public class AudioController {
     }
 
     // Other methods
+    @GetMapping("/image/{id}")
+    public ResponseEntity<byte[]> getImage(@PathVariable("id") Long id) {
+        Optional<Image> optionalImage = imageRepository.findById(id);
+        if (optionalImage.isPresent()) {
+            Image image = optionalImage.get();
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentType(MediaType.IMAGE_JPEG); // Modify the MediaType according to your image type
+            return new ResponseEntity<>(image.getImageData(), headers, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
 }
