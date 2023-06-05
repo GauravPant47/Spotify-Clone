@@ -7,7 +7,6 @@ public class Response {
 	private long size;
 
 	public Response(String fileName, String fileDownloadUri, String fileType, long size) {
-		super();
 		this.fileName = fileName;
 		this.fileDownloadUri = fileDownloadUri;
 		this.fileType = fileType;
@@ -45,5 +44,4 @@ public class Response {
 	public void setSize(long size) {
 		this.size = size;
 	}
-
 }
