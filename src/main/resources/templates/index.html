@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Audio Player</title>
+</head>
+
+<body>
+    <h1>Audio Player</h1>
+
+    <div th:each="audio : ${audioList}">
+        <h2 th:text="${audio.title}"></h2>
+        <audio id="audioPlayer" controls >
+            <source th:src="@{/audio/{id}(id=${audio.id})}" type="audio/mpeg">
+        </audio>
+        <button onclick="playAudio('${audio.id}')">Play</button>
+        <img th:src="@{/image/{id}(id=${audio.id})}" alt="Image" width="400" height="400">
+    </div>
+
+    <hr>
+
+    <form th:action="@{/upload}" enctype="multipart/form-data" method="post">
+        <input type="file" name="audio" accept="audio/*" required>
+        <br>
+        <input type="file" name="image" accept="image/*" required>
+        <br>
+        <input type="text" name="title" placeholder="Title" required>
+        <br>
+        <input type="submit" value="Upload">
+    </form>
+    <script>
+        function playAudio(audioId) {
+            var audioPlayer = document.getElementById("audioPlayer");
+            audioPlayer.src = "/audio/" + audioId;
+            audioPlayer.play();
+        }
+    </script>
+
+</body>
+
+</html>
