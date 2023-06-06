@@ -1,48 +1,43 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
 <head>
     <title>Audio Player</title>
 </head>
+
 <body>
-<a th:href="@{/index}">Home</a>
-<div sec:authorize="isAuthenticated()">
-					<form th:action="@{/logout}" method="POST">
-						<div>
-							<label>Hi, <span sec:authentication="name">Username</span></label>
-						</div>
-						<button type="submit">Logout</button>
-					</form>
-				</div>
+    <a th:href="@{/index}">Home</a>
+    <div sec:authorize="isAuthenticated()">
+        <form th:action="@{/logout}" method="POST">
+            <div>
+                <label>Hi, <span sec:authentication="name">Username</span></label>
+            </div>
+            <button type="submit">Logout</button>
+        </form>
+    </div>
     <h1>Audio Player</h1>
 
     <div th:each="audio : ${audioList}">
         <h2 th:text="${audio.title}"></h2>
         <audio th:id="'audioPlayer-' + ${audio.id}" controls>
-            <source th:src="@{/audio/{id}(id=${audio.id})}" th:type="@{audio/mpeg}">
+            <source th:src="@{/audio/{id}(id=${audio.id})}" type="audio/mpeg">
         </audio>
-        <img th:src="@{/image/{id}(id=${image.id})}" alt="Image" width="200">
-        <button onclick="playAudio('${audio.id}')" type="button">Play</button>
-    </div>
+        <img th:src="@{/image/{id}(id=${audio.id})}" alt="Image" width="200">
+    </div>	
 
     <hr>
-<div >
-  <form th:action="@{/index/upload}" th:enctype="@{multipart/form-data}" method="post">
-        <input type="file" name="audio" accept="audio/*" required>
-        <br>
-        <input type="file" name="image" accept="image/*" required>
-        <br>
-        <input type="text" name="title" placeholder="Title" required>
-        <br>
-        <input type="submit" value="Upload">
-    </form>
-</div>
-  
+    <div>
+        <form th:action="@{/upload}" enctype="multipart/form-data" method="post">
+            <input type="file" name="audio" accept="audio/*" required>
+            <br>
+            <input type="file" name="image" accept="image/*" required>
+            <br>
+            <input type="text" name="title" placeholder="Title" required>
+            <br>
+            <input type="submit" value="Upload">
+        </form>
+    </div>
 
-    <script>
-        function playAudio(audioId) {
-            var audioPlayer = document.getElementById("audioPlayer-" + audioId);
-            audioPlayer.play();
-        }
-    </script>
 </body>
+
 </html>
