@@ -11,7 +11,7 @@
         <audio th:id="'audioPlayer-' + ${audio.id}" controls>
             <source th:src="@{/audio/{id}(id=${audio.id})}" th:type="@{audio/mpeg}">
         </audio>
-        <img th:src="@{/image/{id}(id=${image.id})}" alt="Image" width="200">
+        <img th:src="@{/image/{id}(id=${audio.id})}" alt="Image" width="200">
         <button onclick="playAudio('${audio.id}')" type="button">Play</button>
     </div>
 

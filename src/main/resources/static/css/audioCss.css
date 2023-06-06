@@ -1,0 +1,40 @@
+@charset "UTF-8";
+
+.player-container {
+	text-align: center;
+	margin-top: 50px;
+}
+
+.player {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.control-button {
+	padding: 10px 20px;
+	font-size: 16px;
+	margin: 0 10px;
+}
+
+.progress-bar {
+	width: 80%;
+	height: 10px;
+	background-color: #ddd;
+	margin-top: 20px;
+}
+
+.progress {
+	height: 100%;
+	background-color: #333;
+	width: 0;
+}
+
+.song-info {
+	margin-top: 20px;
+	font-size: 14px;
+}
+
+.song-info p {
+	margin: 5px;
+}
