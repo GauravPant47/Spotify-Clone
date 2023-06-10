@@ -36,8 +36,10 @@
 	<script th:inline="javascript">
 		function playSong(songId) {
 			var audioPlayer = document.getElementById('audio-player');
-			var songUrl = "http://localhost:9095/songs" + songId + "/play";
+			var songUrl = '/songs/' + songId + '(id=${audio.id})';
+
 			audioPlayer.src = songUrl;
+			audioPlayer.play();
 		}
 	</script>
 </body>

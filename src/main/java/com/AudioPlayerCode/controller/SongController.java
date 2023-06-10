@@ -1,9 +1,9 @@
 package com.AudioPlayerCode.controller;
 
-import org.hibernate.engine.jdbc.StreamUtils;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.FileSystemResource;
+
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
 import org.springframework.http.MediaType;
@@ -17,12 +17,14 @@ import org.springframework.web.multipart.MultipartFile;
 import com.AudioPlayerCode.model.Song;
 import com.AudioPlayerCode.repository.SongRepository;
 
-import java.io.File;
+
 import java.io.IOException;
 import java.net.MalformedURLException;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Paths;
 
-import javax.servlet.http.HttpServletResponse;
+
 
 @Controller
 public class SongController {
@@ -47,19 +49,16 @@ public class SongController {
 	}
 
 	@GetMapping("/{id}/play")
-	public ResponseEntity<Resource> playSong(@PathVariable("id") String id) {
-	    Long songId;
-	    try {
-	        songId = Long.parseLong(id);
-	    } catch (NumberFormatException e) {
-	        throw new IllegalArgumentException("Invalid song ID");
-	    }
+	public ResponseEntity<Resource> playSong(@PathVariable("id") Long id) {
 
-	    Song song = songRepository.findById(songId)
+	    Song song = songRepository.findById(id)
 	            .orElseThrow(() -> new IllegalArgumentException("Invalid song ID"));
 
 	    // Assuming the audio files are stored in a directory named "songs" on the server
-	    String filePath = "path/to/songs/" + song.getFilename();
+	    String fileName = song.getFilename();
+	    String encodedFileName = URLEncoder.encode(fileName, StandardCharsets.UTF_8);
+
+	    String filePath = "http://localhost:9095/songs/" + encodedFileName;
 
 	    try {
 	        Resource resource = new UrlResource(Paths.get(filePath).toUri());
