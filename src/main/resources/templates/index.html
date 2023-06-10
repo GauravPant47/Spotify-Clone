@@ -8,8 +8,8 @@
 
     <div th:each="audio : ${audioList}">
         <h2 th:text="${audio.title}"></h2>
-        <audio th:id="'audioPlayer-' + ${audio.id}" controls>
-            <source th:src="@{/audio/{id}(id=${audio.id})}" th:type="@{audio/mpeg}">
+        <audio controls>
+            <source th:src="@{/audio/{id}(id=${audio.id})}" th:type="@{audio/mp3}">
         </audio>
         <img th:src="@{/image/{id}(id=${audio.id})}" alt="Image" width="200">
         <button onclick="playAudio('${audio.id}')" type="button">Play</button>
@@ -27,7 +27,7 @@
         <input type="submit" value="Upload">
     </form>
 
-    <script>
+    <script >
         function playAudio(audioId) {
             var audioPlayer = document.getElementById("audioPlayer-" + audioId);
             audioPlayer.play();

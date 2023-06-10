@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Song Player</title>
+</head>
+<body>
+	<h1>Song Player</h1>
+
+	<audio th:id="audio-player" controls></audio>
+
+	<table>
+		<thead>
+			<tr>
+				<th>Title</th>
+				<th>Artist</th>
+				<th>Actions</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="song : ${songs}">
+				<td th:text="${song.title}"></td>
+				<td th:text="${song.artist}"></td>
+				<td>
+					<button th:onclick="'playSong(' + ${song.id} + ')'" type="button">Play</button>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+	<form method="post" enctype="multipart/form-data"
+		th:action="@{/upload}">
+		<input type="text" name="title" placeholder="Title" required /> <input
+			type="text" name="artist" placeholder="Artist" required /> <input
+			type="file" name="file" required />
+		<button type="submit">Upload</button>
+	</form>
+	<script th:inline="javascript">
+		function playSong(songId) {
+			var audioPlayer = document.getElementById('audio-player');
+			var songUrl = "http://localhost:9095/songs" + songId + "/play";
+			audioPlayer.src = songUrl;
+		}
+	</script>
+</body>
+</html>
