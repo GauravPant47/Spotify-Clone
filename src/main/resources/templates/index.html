@@ -1,37 +1,127 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
 <head>
-    <title>Audio Player</title>
+<meta charset="UTF-8">
+<title>Spotify</title>
+<link rel="stylesheet" th:href="@{css/indexStyle.css}">
 </head>
+
 <body>
-    <h1>Audio Player</h1>
+	<div class="sidebar">
+		<div class="logo">
+			<a href="#"> <img
+				src="https://storage.googleapis.com/pr-newsroom-wp/1/2018/11/Spotify_Logo_CMYK_Green.png"
+				alt="Logo" />
+			</a>
+		</div>
 
-    <div th:each="audio : ${audioList}">
-        <h2 th:text="${audio.title}"></h2>
-        <audio controls>
-            <source th:src="@{/audio/{id}(id=${audio.id})}" th:type="@{audio/mp3}">
-        </audio>
-        <img th:src="@{/image/{id}(id=${audio.id})}" alt="Image" width="200">
-        <button onclick="playAudio('${audio.id}')" type="button">Play</button>
-    </div>
+		<div class="navigation">
+			<ul>
+				<li><a href="#"> <span class="fa fa-home"></span> <span>Home</span>
+				</a></li>
 
-    <hr>
+				<li><a href="#"> <span class="fa fa-search"></span> <span>Search</span>
+				</a></li>
 
-    <form th:action="@{/upload}" th:enctype="@{multipart/form-data}" method="post">
-        <input type="file" name="audio" accept="audio/*" required>
-        <br>
-        <input type="file" name="image" accept="image/*" required>
-        <br>
-        <input type="text" name="title" placeholder="Title" required>
-        <br>
-        <input type="submit" value="Upload">
-    </form>
+				<li><a href="#"> <span class="fa fas fa-book"></span> <span>Your
+							Library</span>
+				</a></li>
+			</ul>
+		</div>
 
-    <script >
-        function playAudio(audioId) {
-            var audioPlayer = document.getElementById("audioPlayer-" + audioId);
-            audioPlayer.play();
-        }
-    </script>
+		<div class="navigation">
+			<ul>
+				<li><a href="#"> <span class="fa fas fa-plus-square"></span>
+						<span>Create Playlist</span>
+				</a></li>
+
+				<li><a href="#"> <span class="fa fas fa-heart"></span> <span>Liked
+							Songs</span>
+				</a></li>
+			</ul>
+		</div>
+
+		<div class="policies">
+			<ul>
+				<li><a href="#">Cookies</a></li>
+				<li><a href="#">Privacy</a></li>
+			</ul>
+		</div>
+	</div>
+
+	<div class="main-container">
+		<div class="topbar">
+			<div class="prev-next-buttons">
+				<button type="button" class="fa fas fa-chevron-left"></button>
+				<button type="button" class="fa fas fa-chevron-right"></button>
+			</div>
+
+			<div class="navbar">
+				<ul>
+					<li><a href="#">Premium</a></li>
+					<li><a href="#">Support</a></li>
+					<li><a href="#">Download</a></li>
+					<li class="divider">|</li>
+				</ul>
+				<ul sec:authorize="!isAuthenticated()">
+					<li><a th:href="@{/register}">Register</a></li>
+					<li><a th:href="@{/login}">Login</a></li>
+				</ul>
+				<div sec:authorize="isAuthenticated()">
+					<form th:action="@{/logout}" method="POST">
+						<div>
+							<label>Hi, <span sec:authentication="name">Username</span></label>
+						</div>
+						<button type="submit">Logout</button>
+					</form>
+				</div>
+			</div>
+		</div>
+
+		<div class="spotify-playlists" th:id="card-Container">
+			<h2>Spotify Playlists</h2>
+			<div class="list">
+				<div class="item" th:each="audio : ${audioList}">
+					<img th:src="@{/image/{id}(id=${audio.id})}" />
+					<div class="play">
+						<span th:id="playBtn"
+							th:onclick="'togglePlay(' + ${audio.id} + ')'"><i
+							class="fa fa-play"></i></span>
+					</div>
+					<h2 th:text="${audio.title}">title</h2>
+					<p th:text="${audio.artist}">artist</p>
+				</div>
+			</div>
+		</div>
+		<div class="bottom">
+			<div class="progressbar">
+				<p th:id="currentTime">0:00</p>
+				<input type="range" name="range" th:id="myProgressBar" min="0"
+					value="0" max="100">
+				<p th:id="duration">0:00</p>
+			</div>
+			<div class="icons">
+				<!-- fontawesome icons -->
+				<i class="fas fa-3x fa-step-backward" th:id="prevBtn"
+					th:onclick="playPrevious(id)"></i> <i
+					class="far fa-3x fa-play-circle"><audio th:id="audioPlayer"></audio></i>
+				<i class="fas fa-3x fa-step-forward" th:id="nextBtn"
+					th:onclick="playNext(id)"></i>
+			</div>
+			<div class="songInfo">
+				<img src="playing.gif" width="42px" alt="" id="gif"> <span
+					id="masterSongName">Warriyo - Mortals [NCS Release]</span>
+			</div>
+		</div>
+	</div>
+
 </body>
+<script th:src="@{https://kit.fontawesome.com/23cecef777.js}"
+	th:crossorigin="anonymous"></script>
+<script th:src="@{js/script.js}"></script>
+\
+<script th:src="@{js/cartScript.js}"></script>
+
 </html>

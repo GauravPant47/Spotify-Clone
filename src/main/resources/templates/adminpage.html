@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Audio Player</title>
+<link rel="stylesheet"
+	th:href="@{https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css}">
+</head>
+<body>
+
+	<form th:action="@{/upload}" th:enctype="@{multipart/form-data}"
+		method="post">
+		<input type="file" name="audio" accept="audio/*" required> <br>
+		<input type="file" name="image" accept="image/*" required> <br>
+		<input type="text" name="title" placeholder="Title" required>
+		<input type="text" name="artist" placeholder="Artist" required>
+		<br> <input type="submit" value="Upload">
+	</form>
+
+
+
+
+
+</body>
+<script th:src="@{js/script.js}"></script>
+</html>
