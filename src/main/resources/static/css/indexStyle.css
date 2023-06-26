@@ -176,7 +176,7 @@ body {
 
 .spotify-playlists h2 {
 	color: #ffffff;
-	font-size: 22px;
+	font-size: 18px;
 	margin-bottom: 20px;
 }
 
@@ -187,6 +187,7 @@ body {
 }
 
 .spotify-playlists .list .item {
+	height: 250px;
 	min-width: 140px;
 	width: 160px;
 	padding: 15px;
