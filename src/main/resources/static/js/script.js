@@ -8,7 +8,6 @@ var currentTimeStamp = document.getElementById('currentTime');
 var durationTimeStamp = document.getElementById('duration');
 var progressBar = document.getElementById('myProgressBar');
 
-
 let isPlaying = false;
 let currentSongIndex = 0;
 
@@ -53,28 +52,28 @@ document.getElementById('prevBtn').addEventListener('click', playPrevious);
 
 
 function updateProgress() {
-  var progressPercentage = (audioPlayer.currentTime / audioPlayer.duration) * 100;
-  progressBar.style.width = progressPercentage + '%';
+	var progressPercentage = (audioPlayer.currentTime / audioPlayer.duration) * 100;
+	progressBar.style.width = progressPercentage + '%';
 
-  // Update current time stamp
-  var currentTime = formatTime(audioPlayer.currentTime);
-  currentTimeStamp.textContent = currentTime;
+	// Update current time stamp
+	var currentTime = formatTime(audioPlayer.currentTime);
+	currentTimeStamp.textContent = currentTime;
 }
 
 function formatTime(time) {
-  var minutes = Math.floor(time / 60);
-  var seconds = Math.floor(time % 60);
-  seconds = seconds < 10 ? '0' + seconds : seconds;
-  return minutes + ':' + seconds;
+	var minutes = Math.floor(time / 60);
+	var seconds = Math.floor(time % 60);
+	seconds = seconds < 10 ? '0' + seconds : seconds;
+	return minutes + ':' + seconds;
 }
 
-audioPlayer.addEventListener('timeupdate',updateProgress);
+audioPlayer.addEventListener('timeupdate', updateProgress);
 
-audioPlayer.addEventListener('ended',function() {playNext(id)});
+audioPlayer.addEventListener('ended', function () { playNext(id) });
 
-progressBar.addEventListener('click', function(e) {
-  var seekTime = (e.offsetX / progress.offsetWidth) * audioPlayer.duration;
-  audioPlayer.currentTime = seekTime;
+progressBar.addEventListener('click', function (e) {
+	var seekTime = (e.offsetX / progress.offsetWidth) * audioPlayer.duration;
+	audioPlayer.currentTime = seekTime;
 });
 
 

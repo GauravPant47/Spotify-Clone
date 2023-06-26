@@ -78,29 +78,37 @@
 			</div>
 		</div>
 
-		<div class="spotify-playlists" th:href="@{/audio/listSong}">
+		<div class="spotify-playlists" th:id="card-Container" th:href="@{/audio/listSong}">
 			<h2>Spotify Playlists</h2>
-			<div class="list" th:id="card-Container">
-				<div class="item" th:each="audio : ${audioList}">
-					<img th:src="@{/image/{id}(id=${audio.id})}" />
-					<div class="play">
-						<span th:id="playBtn" th:onclick="'togglePlay(' + ${audio.id} + ')'">
-							<i class="fa fa-play"></i>
-						</span>
-					</div>
-					<h2 th:text="${audio.title}">title</h2>
-					<p th:text="${audio.artist}">artist</p>
-				</div>
-			</div>
+			<table>
+				<thead>
+					<tr>
+						<th>Title</th>
+						<th>Artist</th>
+						<th>Play</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="audio : ${audioList}">
+						<td th:text="${audio.title}"></td>
+						<td th:text="${audio.artist}"></td>
+						<td>
+							<i class="fa fa-play">
+								<audio th:id="audioPlayer"></audio>
+							</i>
+						</td>
+					</tr>
+				</tbody>
+			</table>
 		</div>
 	</div>
 	<div class="bottom" th:each="audio : ${audioList}">
 		<div class="icons">
 			<!-- fontawesome icons -->
-			<i class="fas fa-2x fa-step-backward" th:id="prevBtn" th:onclick="playPrevious(id)"></i>
-			<i class="far fa-2x fa fa-play" th:id="playBtn">
-				<audio th:id="audioPlayer" th:onclick="'togglePlay(' + ${audio.id} + ')'"></audio></i>
-			<i class="fas fa-2x fa-step-forward" th:id="nextBtn" th:onclick="playNext(id)"></i>
+			<i class="fas fa-2x fa-step-backward" th:id="prevBtn" th:onclick="playPrevious(id)"></i> <i
+				class="far fa-2x fa fa-play" th:id="playBtn" th:onclick="'togglePlay(' + ${audio.id} + ')'"><audio
+					th:id="audioPlayer"></audio></i> <i class="fas fa-2x fa-step-forward" th:id="nextBtn"
+				th:onclick="playNext(id)"></i>
 		</div>
 		<div class="songInfo">
 			<span id="masterSongName" th:text="${audio.title}"></span>

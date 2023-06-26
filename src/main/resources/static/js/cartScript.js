@@ -2,15 +2,15 @@ window.addEventListener('DOMContentLoaded', adjustCards);
 
 function adjustCards() {
     const cardContainer = document.getElementById('card-container');
-    const list = cardContainer.getElementsByClassName('list');
+    const item = cardContainer.getElementsByClassName('item');
 
     const containerWidth = cardContainer.offsetWidth;
-    const cardWidth = list[0].offsetWidth;
+    const cardWidth = item[0].offsetWidth;
 
     const cardsPerRow = Math.floor(containerWidth / cardWidth);
     const marginSpace = (containerWidth % cardWidth) / (cardsPerRow - 1);
 
-    for (let i = 0; i < list.length; i++) {
-        list[i].style.marginRight = marginSpace + 'px';
+    for (let i = 0; i < item.length; i++) {
+        item[i].style.marginRight = marginSpace + 'px';
     }
 }
