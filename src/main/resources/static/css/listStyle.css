@@ -1,0 +1,44 @@
+h1 {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+table {
+    width: 100%;
+}
+
+th, td {
+    color: #fff;
+    padding: 10px;
+    border: none;
+}
+tbody tr:hover{
+    background-color: rgba(255, 255, 255, 0.5);
+}
+
+th {
+    font-weight: bold;
+    text-align: left;
+}
+
+audio {
+    width: 100%;
+}
+.song-image {
+    
+    display: flex;
+    width: 50px;
+    height: 50px;
+}
+td, p{
+    color: white;
+}
+i{
+    cursor: pointer;
+}
+tbody tr td p:hover{
+    color: #000;
+}
+tbody tr td i:hover{
+    color: #000;
+}

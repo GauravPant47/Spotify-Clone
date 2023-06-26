@@ -169,6 +169,8 @@ body {
 }
 
 .spotify-playlists {
+	background-color: black;
+	background: linear-gradient(rgba(255, 255, 255, 0.1) 0%, rgb(0, 0, 0) 100%);
 	padding: 20px 40px;
 }
 
@@ -286,6 +288,7 @@ body {
 	position: fixed;
 	bottom: 0;
 	height: 100px;
+	width: 100vw;
 	background-color: black;
 	color: white;
 	display: flex;
@@ -303,8 +306,13 @@ body {
 }
 
 #myProgressBar {
-	width: 100vw;
+	width: 50vw;
 	cursor: pointer;
+}
+.progressbar{
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
 }
 
 .songItemContainer {

@@ -22,7 +22,7 @@ public class UploadAudioFile {
 	@Autowired
 	private ImageService imageService;
 	
-	@GetMapping("/audio/upload")
+	@GetMapping("/upload")
 	public String index() {
 		return "adminpage";
 	}

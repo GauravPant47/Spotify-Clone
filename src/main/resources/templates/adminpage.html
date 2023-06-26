@@ -1,20 +1,89 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <head>
-	<title>Audio Player</title>
-	<link rel="stylesheet" th:href="@{https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css}">
+	<meta charset="UTF-8">
+	<title>Spotify</title>
+	<link rel="stylesheet" th:href="@{css/indexStyle.css}">
+	<link rel="stylesheet" th:href="@{css/adminStyle.css}">
 </head>
 
 <body>
-	<form th:action="@{/upload}" th:enctype="@{multipart/form-data}" method="post">
-		<input type="file" name="audio" accept="audio/*" required> <br>
-		<input type="file" name="image" accept="image/*" required> <br>
-		<input type="text" name="title" placeholder="Title" required>
-		<input type="text" name="artist" placeholder="Artist" required>
-		<br> <input type="submit" value="Upload">
-	</form>
+	<div class="sidebar">
+		<div class="logo">
+			<a th:href="@{/audio}"> <img
+					src="https://storage.googleapis.com/pr-newsroom-wp/1/2018/11/Spotify_Logo_CMYK_Green.png"
+					alt="Logo" />
+			</a>
+		</div>
+
+		<div class="navigation">
+			<ul>
+				<li><a th:href="@{/audio}"> <span class="fa fa-home"></span> <span>Home</span>
+					</a></li>
+
+				<li><a href="#"> <span class="fa fa-search"></span> <span>Search</span>
+					</a></li>
+
+				<li><a th:href="@{/listSong}"> <span class="fa fas fa-book"></span> <span>Your
+							Library</span>
+					</a></li>
+			</ul>
+		</div>
+
+		<div class="policies">
+			<ul>
+				<li><a href="#">Cookies</a></li>
+				<li><a href="#">Privacy</a></li>
+			</ul>
+		</div>
+	</div>
+
+	<div class="main-container">
+		<div class="topbar">
+			<div class="prev-next-buttons">
+				<button type="button" class="fa fas fa-chevron-left" th:id="backButton" disabled></button>
+				<button type="button" class="fa fas fa-chevron-right" th:id="forwardButton" disabled></button>
+			</div>
+
+			<div class="navbar">
+				<ul sec:authorize="!isAuthenticated()">
+					<li><a th:href="@{/register}">Register</a></li>
+					<li><a th:href="@{/login}">Login</a></li>
+				</ul>
+				<div sec:authorize="isAuthenticated()">
+					<form th:action="@{/logout}" method="POST">
+						<div>
+							<label>Hi, <span sec:authentication="name">Username</span></label>
+						</div>
+						<button type="submit">Logout</button>
+					</form>
+				</div>
+			</div>
+		</div>
+		<div class="upload">
+			<form th:action="@{/upload}" th:enctype="@{multipart/form-data}" method="post">
+				<div class="btn-file">
+					<input type="file" name="audio" accept="audio/*" required>
+				</div>
+				<div class="btn-file">
+					<input type="file" name="image" accept="image/*" required>
+				</div>
+				<div class="btn-up">
+					<input type="text" name="title" placeholder="Title" required>
+				</div>
+				<div class="btn-up">
+					<input type="text" name="artist" placeholder="Artist" required>
+				</div>
+				<div class="btn-submit">
+					<input type="submit" value="Upload">
+				</div>
+			</form>
+		</div>
+	</div>
 </body>
+<script th:src="@{https://kit.fontawesome.com/23cecef777.js}" th:crossorigin="anonymous"></script>
 <script th:src="@{js/script.js}"></script>
+<script th:src="@{js/cartScript.js}"></script>
 
 </html>

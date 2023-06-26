@@ -5,42 +5,30 @@
 	<meta charset="UTF-8">
 	<title>Spotify</title>
 	<link rel="stylesheet" th:href="@{css/indexStyle.css}">
+	<link rel="stylesheet" th:href="@{css/listStyle.css}">
 </head>
 
 <body>
 	<div class="sidebar">
 		<div class="logo">
-			<a href="#"> <img src="https://storage.googleapis.com/pr-newsroom-wp/1/2018/11/Spotify_Logo_CMYK_Green.png"
+			<a th:href="@{/audio}"> <img src="https://storage.googleapis.com/pr-newsroom-wp/1/2018/11/Spotify_Logo_CMYK_Green.png"
 					alt="Logo" />
 			</a>
 		</div>
 
 		<div class="navigation">
 			<ul>
-				<li><a href="#"> <span class="fa fa-home"></span> <span>Home</span>
+				<li><a th:href="@{/audio}"> <span class="fa fa-home"></span> <span>Home</span>
 					</a></li>
 
 				<li><a href="#"> <span class="fa fa-search"></span> <span>Search</span>
 					</a></li>
 
-				<li><a href="#"> <span class="fa fas fa-book"></span> <span>Your
+				<li><a th:href="@{/listSong}"><span class="fa fas fa-book"></span> <span>Your
 							Library</span>
 					</a></li>
 			</ul>
 		</div>
-
-		<div class="navigation">
-			<ul>
-				<li><a href="#"> <span class="fa fas fa-plus-square"></span>
-						<span>Create Playlist</span>
-					</a></li>
-
-				<li><a href="#"> <span class="fa fas fa-heart"></span> <span>Liked
-							Songs</span>
-					</a></li>
-			</ul>
-		</div>
-
 		<div class="policies">
 			<ul>
 				<li><a href="#">Cookies</a></li>
@@ -52,17 +40,11 @@
 	<div class="main-container">
 		<div class="topbar">
 			<div class="prev-next-buttons">
-				<button type="button" class="fa fas fa-chevron-left"></button>
-				<button type="button" class="fa fas fa-chevron-right"></button>
+				<button type="button" class="fa fas fa-chevron-left" th:id="backButton" disabled></button>
+				<button type="button" class="fa fas fa-chevron-right" th:id="forwardButton" disabled></button>
 			</div>
 
 			<div class="navbar">
-				<ul>
-					<li><a href="#">Premium</a></li>
-					<li><a href="#">Support</a></li>
-					<li><a href="#">Download</a></li>
-					<li class="divider">|</li>
-				</ul>
 				<ul sec:authorize="!isAuthenticated()">
 					<li><a th:href="@{/register}">Register</a></li>
 					<li><a th:href="@{/login}">Login</a></li>
@@ -83,19 +65,22 @@
 			<table>
 				<thead>
 					<tr>
+						<th>#</th>
 						<th>Title</th>
 						<th>Artist</th>
-						<th>Play</th>
 					</tr>
 				</thead>
 				<tbody>
 					<tr th:each="audio : ${audioList}">
-						<td th:text="${audio.title}"></td>
-						<td th:text="${audio.artist}"></td>
 						<td>
-							<i class="fa fa-play">
-								<audio th:id="audioPlayer"></audio>
-							</i>
+							<i class="fa fa-play" th:id="playBtn" th:onclick="'togglePlay(' + ${audio.id} + ')'"></i>
+						</td>
+						<td>
+							<img th:src="@{/image/{id}(id=${audio.id})}" class="song-image" />
+							<p th:text="${audio.title}"></p>
+						</td>
+						<td>
+							<p th:text="${audio.artist}"></p>
 						</td>
 					</tr>
 				</tbody>
@@ -105,10 +90,10 @@
 	<div class="bottom" th:each="audio : ${audioList}">
 		<div class="icons">
 			<!-- fontawesome icons -->
-			<i class="fas fa-2x fa-step-backward" th:id="prevBtn" th:onclick="playPrevious(id)"></i> <i
-				class="far fa-2x fa fa-play" th:id="playBtn" th:onclick="'togglePlay(' + ${audio.id} + ')'"><audio
-					th:id="audioPlayer"></audio></i> <i class="fas fa-2x fa-step-forward" th:id="nextBtn"
-				th:onclick="playNext(id)"></i>
+			<i class="fas fa-2x fa-step-backward" th:id="prevBtn" th:onclick="playPrevious(id)"></i> 
+			<i class="far fa-2x fa fa-play" th:id="playBtn" th:onclick="'togglePlay(' + ${audio.id} + ')'">
+				<audio th:id="audioPlayer"></audio></i> 
+			<i class="fas fa-2x fa-step-forward" th:id="nextBtn" th:onclick="playNext(id)"></i>
 		</div>
 		<div class="songInfo">
 			<span id="masterSongName" th:text="${audio.title}"></span>

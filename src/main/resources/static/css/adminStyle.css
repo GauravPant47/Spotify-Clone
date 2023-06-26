@@ -1,21 +1,27 @@
-* {
-	padding: 0;
-	margin: 0;
+.upload {
+	display: flex;
+	align-items: baseline;
+	justify-content: center;
 }
 
-body {
-	background-color: #121212;
-	font-family: 'Montserrat', sans-serif;
+.upload form {
+	padding: 50px;
+	height: 100px;
+	margin: 30px;
 }
 
-
-.sidebar {
-	position: fixed;
-	width: 196px;
-	background-color: #000000;
-	padding: 24px;
+.btn-file input {
+	padding: auto;
 }
 
-.sidebar .logo img {
-	width: 130px;
+.btn-up input {
+	padding: 5px 20px 5px;
+	text-align: left;
+}
+
+.btn-submit input {
+	padding: 5px 15px 5px;
+	background-color: rgb(62, 62, 245);
+	border: 20px;
+	border-radius: 10%;
 }
