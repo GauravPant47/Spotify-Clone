@@ -16,13 +16,13 @@ function togglePlay(id) {
 	if (isPlaying) {
 		audioPlayer.src = songUrl + '/pause';
 		audioPlayer.pause();
-		playBtn.innerHTML = '<i class="fa fa-play"></i>';
+		playBtn.innerHTML = '<i class="fa fa-play" aria-hidden="true"></i>';
 		currentSongIndex = id;
 	}
 	else {
 		audioPlayer.src = songUrl + '/play';
 		audioPlayer.play();
-		playBtn.innerHTML = '<i class="fa fa-pause"></i>';
+		playBtn.innerHTML = '<i class="fa fa-play" aria-hidden="true"></i>';
 	}
 	isPlaying = !isPlaying;
 }

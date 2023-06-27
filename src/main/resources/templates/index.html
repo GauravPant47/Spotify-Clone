@@ -78,13 +78,14 @@
 						<img th:src="@{/image/{id}(id=${audio.id})}" />
 						<div class="play">
 							<span th:id="playBtn" th:onclick="'togglePlay(' + ${audio.id} + ')'">
-								<i class="fa fa-play"></i>
+								<i class="fa fa-play" aria-hidden="true"></i>
 							</span>
 						</div>
 						<h2 th:text="${audio.title}">title</h2>
 						<p th:text="${audio.artist}">artist</p>
 					</div>
 				</div>
+
 			</div>
 		</div>
 	</div>
