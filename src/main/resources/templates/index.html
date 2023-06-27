@@ -70,10 +70,10 @@
 			</div>
 		</div>
 
-		<div class="spotify-playlists" th:href="@{/audio/listSong}">
+		<div class="spotify-playlists">
 			<h2>Spotify Playlists</h2>
 			<div th:id="cart">
-				<div class="list">
+				<div class="list" th:href="@{/audio/listSong}">
 					<div class="item" th:each="audio : ${audioList}">
 						<img th:src="@{/image/{id}(id=${audio.id})}" />
 						<div class="play">

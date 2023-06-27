@@ -17,12 +17,18 @@ function togglePlay(id) {
 		audioPlayer.src = songUrl + '/pause';
 		audioPlayer.pause();
 		playBtn.innerHTML = '<i class="fa fa-play" aria-hidden="true"></i>';
-		currentSongIndex = id;
+		currentSongIndex = 0;
 	}
 	else {
 		audioPlayer.src = songUrl + '/play';
 		audioPlayer.play();
 		playBtn.innerHTML = '<i class="fa fa-play" aria-hidden="true"></i>';
+		currentSongIndex = id;
+	}
+	if (audioPlayer.play) {
+		currentSongIndex = id;
+	} else {
+		currentSongIndex = 0;
 	}
 	isPlaying = !isPlaying;
 }
@@ -36,6 +42,9 @@ function playNext(id) {
 		audioPlayer.play();
 		currentSongIndex++;
 	}
+	if (currentSongIndex >= id) {
+		currentSongIndex--;
+	}
 }
 document.getElementById('nextBtn').addEventListener('click', playNext);
 
@@ -46,6 +55,9 @@ function playPrevious(id) {
 		audioPlayer.src = songUrl + '/play';
 		audioPlayer.play();
 		currentSongIndex--;
+	}
+	if (currentSongIndex <= id) {
+		currentSongIndex++;
 	}
 }
 document.getElementById('prevBtn').addEventListener('click', playPrevious);
