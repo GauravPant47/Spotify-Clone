@@ -1,77 +1,13 @@
-var backwardHistory = [];
-var forwardHistory = [];
+function adjustCartLayout() {
+    var items = document.getElementsByClassName("item");
+    var itemsPerLine = 6; // Change this value if you want a different number of items per line
 
-function updateHistory(stateObj) {
-    var url = stateObj.url;
-
-    // Perform actions based on the URL (e.g., update page content)
-
-    backwardHistory.push(stateObj);
-
-    // Clear the forward history
-    forwardHistory = [];
-
-    // Enable/disable buttons based on history
-    updateButtons();
-}
-
-function goBack() {
-    if (backwardHistory.length > 1) {
-        var currentState = backwardHistory.pop();
-        forwardHistory.push(currentState);
-        var previousState = backwardHistory[backwardHistory.length - 1];
-
-        // Perform actions based on the previous state (e.g., update page content)
-
-        history.pushState(previousState, '', previousState.url);
-
-        // Enable/disable buttons based on history
-        updateButtons();
+    for (var i = 0; i < items.length; i += itemsPerLine) {
+        var lineItems = Array.from(items).slice(i, i + itemsPerLine);
+        var lineHeight = Math.max(...lineItems.map(item => item.offsetHeight));
+        lineItems.forEach(item => item.style.height = lineHeight + "px");
     }
 }
 
-function goForward() {
-    if (forwardHistory.length > 0) {
-        var currentState = forwardHistory.pop();
-        backwardHistory.push(currentState);
-
-        // Perform actions based on the current state (e.g., update page content)
-
-        history.pushState(currentState, '', currentState.url);
-
-        // Enable/disable buttons based on history
-        updateButtons();
-    }
-}
-
-function updateButtons() {
-    var backButton = document.getElementById('backButton');
-    var forwardButton = document.getElementById('forwardButton');
-
-    if (backwardHistory.length > 1) {
-        backButton.disabled = false;
-    } else {
-        backButton.disabled = true;
-    }
-
-    if (forwardHistory.length > 0) {
-        forwardButton.disabled = false;
-    } else {
-        forwardButton.disabled = true;
-    }
-}
-
-// Add event listeners to the buttons
-var backButton = document.getElementById('backButton');
-backButton.addEventListener('click', goBack);
-
-var forwardButton = document.getElementById('forwardButton');
-forwardButton.addEventListener('click', goForward);
-
-// Example usage
-var initialState = { url: '/audio' };
-updateHistory(initialState);
-
-// Simulate navigation
-var newState = { url: '/listSong' };
-updateHistory(newState);
+window.addEventListener("resize", adjustCartLayout);
+window.addEventListener("DOMContentLoaded", adjustCartLayout);

@@ -3,9 +3,19 @@
 
 <head>
 	<meta charset="UTF-8">
-	<title>Spotify</title>
+	<title>Spotify - Web Player: Application</title>
 	<link rel="stylesheet" th:href="@{css/indexStyle.css}">
 </head>
+<style>
+	table {
+		border-collapse: collapse;
+	}
+
+	td {
+		border: 1px solid black;
+		padding: 5px;
+	}
+</style>
 
 <body>
 	<div class="sidebar">
@@ -62,16 +72,18 @@
 
 		<div class="spotify-playlists" th:href="@{/audio/listSong}">
 			<h2>Spotify Playlists</h2>
-			<div class="list" th:id="card-Container">
-				<div class="item" th:each="audio : ${audioList}">
-					<img th:src="@{/image/{id}(id=${audio.id})}" />
-					<div class="play">
-						<span th:id="playBtn" th:onclick="'togglePlay(' + ${audio.id} + ')'">
-							<i class="fa fa-play"></i>
-						</span>
+			<div th:id="cart">
+				<div class="list">
+					<div class="item" th:each="audio : ${audioList}">
+						<img th:src="@{/image/{id}(id=${audio.id})}" />
+						<div class="play">
+							<span th:id="playBtn" th:onclick="'togglePlay(' + ${audio.id} + ')'">
+								<i class="fa fa-play"></i>
+							</span>
+						</div>
+						<h2 th:text="${audio.title}">title</h2>
+						<p th:text="${audio.artist}">artist</p>
 					</div>
-					<h2 th:text="${audio.title}">title</h2>
-					<p th:text="${audio.artist}">artist</p>
 				</div>
 			</div>
 		</div>

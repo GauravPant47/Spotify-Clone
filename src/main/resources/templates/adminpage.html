@@ -64,16 +64,20 @@
 		<div class="upload">
 			<form th:action="@{/upload}" th:enctype="@{multipart/form-data}" method="post">
 				<div class="btn-file">
-					<input type="file" name="audio" accept="audio/*" required>
+					<label for="audio">Audio:</label>
+					<input type="file" th:id="audio" name="audio" accept="audio/*" required>
 				</div>
 				<div class="btn-file">
-					<input type="file" name="image" accept="image/*" required>
+					<label for="image">Image:</label>
+					<input type="file" th:id="image" name="image" accept="image/*" required>
 				</div>
 				<div class="btn-up">
-					<input type="text" name="title" placeholder="Title" required>
+					<label for="title">Title:</label>
+					<input type="text" th:id="title" name="title" placeholder="Title" required>
 				</div>
 				<div class="btn-up">
-					<input type="text" name="artist" placeholder="Artist" required>
+					<label for="artist">Artist:</label>
+					<input type="text" th:id="artist" name="artist" placeholder="Artist" required>
 				</div>
 				<div class="btn-submit">
 					<input type="submit" value="Upload">
