@@ -77,7 +77,7 @@
 					<div class="item" th:each="audio : ${audioList}">
 						<img th:src="@{/image/{id}(id=${audio.id})}" />
 						<div class="play">
-							<span th:id="playBtn" th:onclick="'togglePlay(' + ${audio.id} + ')'">
+							<span th:id="playBtn" th:onclick="'togglePlay(' + ${audio.id} + ')'" >
 								<i class="fa fa-play" aria-hidden="true"></i>
 							</span>
 						</div>
@@ -92,10 +92,12 @@
 	<div class="bottom" th:each="audio : ${audioList}">
 		<div class="icons">
 			<!-- fontawesome icons -->
-			<i class="fas fa-2x fa-step-backward" th:id="prevBtn" th:onclick="playPrevious(id)"></i>
-			<i class="far fa-2x fa fa-play" th:id="playBtn" th:onclick="'togglePlay(' + ${audio.id} + ')'">
-				<audio th:id="audioPlayer"></audio></i>
-			<i class="fas fa-2x fa-step-forward" th:id="nextBtn" th:onclick="playNext(id)"></i>
+			<i class="fas fa-2x fa-step-backward" th:id="prevBtn" th:onclick="playPrevious()"></i>
+			<span th:id="playBtn">
+				<i class="far fa-2x fa fa-play"></i>
+				<audio th:id="audioPlayer"></audio>
+			</span>
+			<i class="fas fa-2x fa-step-forward" th:id="nextBtn" th:onclick="playNext()"></i>
 		</div>
 		<div class="songInfo">
 			<span id="masterSongName" th:text="${audio.title}"></span>

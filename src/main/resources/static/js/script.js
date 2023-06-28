@@ -23,40 +23,36 @@ function togglePlay(id) {
 	else {
 		audioPlayer.src = songUrl + '/play';
 		audioPlayer.play();
-		playBtn.innerHTML = '<i class="fa fa-play" aria-hidden="true"></i>';
+		playBtn.innerHTML = '<i class="fa fa-pause" aria-hidden="true"></i>';
 	}
 	currentSongIndex = id;
 	isPlaying = !isPlaying;
 }
 document.getElementById('playBtn').addEventListener('click', togglePlay);
 
+
+
 volumeSlider.addEventListener('input', () => {
 	audioPlayer.volume = volumeSlider.value;
 });
 
-function playNext(id) {
-	id = currentSongIndex;
+function playNext() {
+	let id = currentSongIndex;
 	const songUrl = '/audio/' + id;
 	if (isPlaying) {
 		audioPlayer.src = songUrl + '/play';
 		audioPlayer.play();
-		currentSongIndex++;
-	}
-	if (currentSongIndex >= id) {
 		currentSongIndex++;
 	}
 }
 document.getElementById('nextBtn').addEventListener('click', playNext);
 
-function playPrevious(id) {
-	id = currentSongIndex;
+function playPrevious() {
+	let id = currentSongIndex;
 	const songUrl = '/audio/' + id;
 	if (isPlaying) {
 		audioPlayer.src = songUrl + '/play';
 		audioPlayer.play();
-		currentSongIndex--;
-	}
-	if (currentSongIndex <= id) {
 		currentSongIndex--;
 	}
 }
