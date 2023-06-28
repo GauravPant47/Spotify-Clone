@@ -1,74 +1,74 @@
-var audioPlayer = document.getElementById('audioPlayer');
-var playBtn = document.getElementById('playBtn');
-var prevBtn = document.getElementById('prevButton');
-var nextBtn = document.getElementById('nextButton');
-var songTitle = document.getElementById('songTitle');
-var songArtist = document.getElementById('songArtist');
-var currentTimeStamp = document.getElementById('currentTime');
-var durationTimeStamp = document.getElementById('duration');
-var progressBar = document.getElementById('myProgressBar');
+const audioPlayer = document.getElementById('audioPlayer');
+const playBtn = document.getElementById('playBtn');
+const prevBtn = document.getElementById('prevButton');
+const nextBtn = document.getElementById('nextButton');
+const songTitle = document.getElementById('songTitle');
+const songArtist = document.getElementById('songArtist');
+const currentTimeStamp = document.getElementById('currentTime');
+const durationTimeStamp = document.getElementById('duration');
+const progressBar = document.getElementById('myProgressBar');
+const volumeSlider = document.getElementById('volume-slider');
+
 
 let isPlaying = false;
 let currentSongIndex = 0;
 
 function togglePlay(id) {
-	var songUrl = '/audio/' + id;
+	const songUrl = '/audio/' + id;
 	if (isPlaying) {
 		audioPlayer.src = songUrl + '/pause';
 		audioPlayer.pause();
 		playBtn.innerHTML = '<i class="fa fa-play" aria-hidden="true"></i>';
-		currentSongIndex = 0;
 	}
 	else {
 		audioPlayer.src = songUrl + '/play';
 		audioPlayer.play();
 		playBtn.innerHTML = '<i class="fa fa-play" aria-hidden="true"></i>';
-		currentSongIndex = id;
 	}
-	if (audioPlayer.play) {
-		currentSongIndex = id;
-	} else {
-		currentSongIndex = 0;
-	}
+	currentSongIndex = id;
 	isPlaying = !isPlaying;
 }
 document.getElementById('playBtn').addEventListener('click', togglePlay);
 
+volumeSlider.addEventListener('input', () => {
+	audioPlayer.volume = volumeSlider.value;
+});
+
 function playNext(id) {
 	id = currentSongIndex;
-	var songUrl = '/audio/' + id;
+	const songUrl = '/audio/' + id;
 	if (isPlaying) {
 		audioPlayer.src = songUrl + '/play';
 		audioPlayer.play();
 		currentSongIndex++;
 	}
 	if (currentSongIndex >= id) {
-		currentSongIndex--;
+		currentSongIndex++;
 	}
 }
 document.getElementById('nextBtn').addEventListener('click', playNext);
 
 function playPrevious(id) {
 	id = currentSongIndex;
-	var songUrl = '/audio/' + id;
+	const songUrl = '/audio/' + id;
 	if (isPlaying) {
 		audioPlayer.src = songUrl + '/play';
 		audioPlayer.play();
 		currentSongIndex--;
 	}
 	if (currentSongIndex <= id) {
-		currentSongIndex++;
+		currentSongIndex--;
 	}
 }
 document.getElementById('prevBtn').addEventListener('click', playPrevious);
 
 
 function updateProgress() {
-	var progressPercentage = (audioPlayer.currentTime / audioPlayer.duration) * 100;
+	const progressPercentage = (audioPlayer.currentTime / audioPlayer.duration) * 100;
 	progressBar.style.width = progressPercentage + '%';
 
 	// Update current time stamp
-	var currentTime = formatTime(audioPlayer.currentTime);
+	const currentTime = formatTime(audioPlayer.currentTime);
 	currentTimeStamp.textContent = currentTime;
 }
 
@@ -87,8 +87,5 @@ progressBar.addEventListener('click', function (e) {
 	var seekTime = (e.offsetX / progress.offsetWidth) * audioPlayer.duration;
 	audioPlayer.currentTime = seekTime;
 });
-
-
-
 
 
