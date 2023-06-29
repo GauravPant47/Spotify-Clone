@@ -17,22 +17,27 @@ function togglePlay(id) {
 	const songUrl = '/audio/' + id;
 	if (isPlaying) {
 		audioPlayer.src = songUrl + '/pause';
-		audioPlayer.pause();
-		playBtn.innerHTML = '<i class="fa fa-play" aria-hidden="true"></i>';
 	}
 	else {
 		audioPlayer.src = songUrl + '/play';
-		audioPlayer.play();
-		playBtn.innerHTML = '<i class="fa fa-pause" aria-hidden="true"></i>';
 	}
 	currentSongIndex = id;
 	isPlaying = !isPlaying;
 }
 document.getElementById('playBtn').addEventListener('click', togglePlay);
 
+playBtn.addEventListener("click", function () {
+	audioPlayer.play();
+	playBtn.innerHTML = '<i class="fa fa-pause" aria-hidden="true"></i>';
+});
+
+playBtn.addEventListener("click", function (togglePlay) {
+	audioPlayer.pause();
+	playBtn.innerHTML = '<i class="fa fa-play" aria-hidden="true"></i>';
+});
 
 
-volumeSlider.addEventListener('input', () => {
+volumeSlider.addEventListener('input', (togglePlay) => {
 	audioPlayer.volume = volumeSlider.value;
 });
 
