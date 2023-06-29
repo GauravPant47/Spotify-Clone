@@ -26,16 +26,24 @@ public class AudioController {
 
 	@Autowired
 	private ImageService imageService;
-	
+
 	@GetMapping("/audio")
 	public String uploadFile(Model model) {
 		List<Audio> audioList = audioService.getAllSong();
 		model.addAttribute("audioList", audioList);
 		return "index";
 	}
-	
+
 	private boolean isPaused = false; // Track the paused state
 
+	@GetMapping("/songs")
+	public ResponseEntity<List<Audio>> getAllSongs() {
+		List<Audio> songs = audioService.getAllSong();
+		if (songs.isEmpty()) {
+			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+		}
+		return new ResponseEntity<>(songs, HttpStatus.OK);
+	}
 
 	@GetMapping("/audio/{id}/play")
 	public ResponseEntity<byte[]> getAudio(@PathVariable("id") Long id) {

@@ -84,4 +84,3 @@ progressBar.addEventListener('click', function (e) {
 	audioPlayer.currentTime = seekTime;
 });
 
-
