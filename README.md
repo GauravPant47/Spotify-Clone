@@ -1,8 +1,8 @@
-# project-documentation
+# Spotify Clone
 
 <p align="center">
   <a href="" rel="noopener">
- <img width=200px height=200px src="https://i.imgur.com/6wj0hh6.jpg" alt="Project logo"></a>
+ <img width=200px height=200px src="https://storage.googleapis.com/pr-newsroom-wp/1/2018/11/Spotify_Logo_CMYK_Green.png" alt="Project logo"></a>
 </p>
 
 <h3 align="center">Project Title</h3>
