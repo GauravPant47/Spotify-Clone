@@ -2,7 +2,7 @@
 
 <p align="center">
   <a href="" rel="noopener">
- <img width=250px height=130px src="https://storage.googleapis.com/pr-newsroom-wp/1/2018/11/Spotify_Logo_CMYK_Green.png" alt="Project logo"></a>
+ <img width=250px height=100px src="https://storage.googleapis.com/pr-newsroom-wp/1/2018/11/Spotify_Logo_CMYK_Green.png" alt="Project logo"></a>
 </p>
 
 <h3 align="center">Project Title</h3>
