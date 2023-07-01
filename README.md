@@ -1,4 +1,4 @@
-![image](https://github.com/GauravPant47/Spotify-Clone/assets/115808373/06134695-59d5-4a6c-8aa5-7106637250b8)# Spotify Clone
+# Spotify Clone
 
 <p align="center">
   <a href="" rel="noopener">
