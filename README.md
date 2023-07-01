@@ -1,4 +1,4 @@
-# Spotify Clone
+![image](https://github.com/GauravPant47/Spotify-Clone/assets/115808373/06134695-59d5-4a6c-8aa5-7106637250b8)# Spotify Clone
 
 <p align="center">
   <a href="" rel="noopener">
@@ -58,7 +58,8 @@ Give the example
 And repeat
 
 ```
-until finished
+![image](https://github.com/GauravPant47/Spotify-Clone/assets/115808373/e458901b-18c0-4759-9df1-51bb96610aa4)
+
 ```
 
 End with an example of getting some data out of the system or using it for a little demo.
