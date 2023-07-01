@@ -1,13 +1,13 @@
-const audioPlayer = document.getElementById('audioPlayer');
-const playBtn = document.getElementById('playBtn');
-const prevBtn = document.getElementById('prevButton');
-const nextBtn = document.getElementById('nextButton');
-const songTitle = document.getElementById('songTitle');
-const songArtist = document.getElementById('songArtist');
-const currentTimeStamp = document.getElementById('currentTime');
-const durationTimeStamp = document.getElementById('duration');
-const progressBar = document.getElementById('myProgressBar');
-const volumeSlider = document.getElementById('volume-slider');
+var audioPlayer = document.getElementById('audioPlayer');
+var playBtn = document.getElementById('playBtn');
+var prevBtn = document.getElementById('prevButton');
+var nextBtn = document.getElementById('nextButton');
+var songTitle = document.getElementById('songTitle');
+var songArtist = document.getElementById('songArtist');
+var currentTimeStamp = document.getElementById('currentTime');
+var durationTimeStamp = document.getElementById('duration');
+var progressBar = document.getElementById('myProgressBar');
+var volumeSlider = document.getElementById('volume-slider');
 
 
 let isPlaying = false;
@@ -17,29 +17,19 @@ function togglePlay(id) {
 	const songUrl = '/audio/' + id;
 	if (isPlaying) {
 		audioPlayer.src = songUrl + '/pause';
+		audioPlayer.play();
+		playBtn.innerHTML = '<i class="fa fa-pause"></i>';
 	}
 	else {
 		audioPlayer.src = songUrl + '/play';
+		audioPlayer.pause();
+		playBtn.innerHTML = '<i class="fa fa-play"></i>';
 	}
 	currentSongIndex = id;
 	isPlaying = !isPlaying;
 }
 document.getElementById('playBtn').addEventListener('click', togglePlay);
 
-playBtn.addEventListener("click", function () {
-	audioPlayer.play();
-	playBtn.innerHTML = '<i class="fa fa-pause" aria-hidden="true"></i>';
-});
-
-playBtn.addEventListener("click", function (togglePlay) {
-	audioPlayer.pause();
-	playBtn.innerHTML = '<i class="fa fa-play" aria-hidden="true"></i>';
-});
-
-
-volumeSlider.addEventListener('input', (togglePlay) => {
-	audioPlayer.volume = volumeSlider.value;
-});
 
 function playNext() {
 	let id = currentSongIndex;

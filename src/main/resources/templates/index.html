@@ -92,23 +92,15 @@
 	<div class="bottom" th:each="audio : ${audioList}">
 		<div class="icons">
 			<!-- fontawesome icons -->
-			<i class="fas fa-2x fa-step-backward" th:id="prevBtn" th:onclick="playPrevious()"></i>
-			<span th:id="playBtn">
-				<i class="far fa-2x fa fa-play"></i>
-				<audio th:id="audioPlayer"></audio>
-			</span>
-			<i class="fas fa-2x fa-step-forward" th:id="nextBtn" th:onclick="playNext()"></i>
-		</div>
-		<div class="songInfo">
-			<span id="masterSongName" th:text="${audio.title}"></span>
+			<i class="fas fa-2x fa-step-backward" th:id="prevBtn" th:onclick="playPrevious(id)"></i> 
+			<i class="far fa-2x fa fa-play" th:id="playBtn" th:onclick="'togglePlay(' + ${audio.id} + ')'">
+				<audio th:id="audioPlayer"></audio></i> 
+			<i class="fas fa-2x fa-step-forward" th:id="nextBtn" th:onclick="playNext(id)"></i>
 		</div>
 		<div class="progressbar">
 			<p th:id="currentTime">0:00</p>
 			<input type="range" name="range" th:id="myProgressBar" min="0" value="0" max="100">
 			<p th:id="duration">0:00</p>
-		</div>
-		<div class="right">
-			<input type="range" th:id="volume-slider" min="0" max="1" step="0.01" value="1">
 		</div>
 	</div>
 

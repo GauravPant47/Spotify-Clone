@@ -95,9 +95,6 @@
 				<audio th:id="audioPlayer"></audio></i> 
 			<i class="fas fa-2x fa-step-forward" th:id="nextBtn" th:onclick="playNext(id)"></i>
 		</div>
-		<div class="songInfo">
-			<span id="masterSongName" th:text="${audio.title}"></span>
-		</div>
 		<div class="progressbar">
 			<p th:id="currentTime">0:00</p>
 			<input type="range" name="range" th:id="myProgressBar" min="0" value="0" max="100">
