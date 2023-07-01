@@ -51,13 +51,11 @@ A step-by-step series of examples that tell you how to get a development env run
 
 Say what the step will be
 
-```
-Give the example
-```
+![image](https://github.com/GauravPant47/Spotify-Clone/assets/115808373/7fb548f0-e03e-4a50-85e9-d65e830d1b74)
 
 And repeat
 
-![image](https://github.com/GauravPant47/Spotify-Clone/assets/115808373/e458901b-18c0-4759-9df1-51bb96610aa4)
+
 
 
 End with an example of getting some data out of the system or using it for a little demo.
